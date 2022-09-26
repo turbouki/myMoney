@@ -1,6 +1,7 @@
 buildscript {
+    // ext 전역변수설정 키워드
     ext {
-        springBootVersion = '2.1.7.RELEASE'
+        springBootVersion = '2.1.9.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -17,12 +18,13 @@ buildscript {
 //    id 'java'
 //}
 
+// 위에서 선언한 플러그인 의존성들을 적용할 것인지를 결정하는 크드
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
+apply plugin: 'io.spring.dependency-management' // 스프링 부트의 의존성을 관리해 주는 플러그인
 
-group 'org.my.money'
+group 'com.my.money'
 version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
@@ -30,9 +32,36 @@ repositories {
     mavenCentral()
 }
 
+// gradle 버전확인
+// gradlew --version
+
+
+//Gradle 버전 7 이후로는 compile을 사용하지 않는다는 것이었다.
+//
+//        dependencies {
+//            compileOnly 'org.projectlombok:lombok'
+//            annotationProcessor 'org.projectlombok:lombok'
+//        }
 dependencies {
+//    implementation 'junit:junit:4.13.2'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.h2database:h2'
+
+    // lombok
+//    implementation('org.projectlombok:lombok')
+//    annotationProcessor('org.projectlombok:lombok')
+//    testImplementation('org.projectlombok:lombok')
+//    testAnnotationProcessor('org.projectlombok:lombok')
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // settins > plugins > find lombok and install
+    // settings > Build, Eexec.., Deploy... > compiler > Annotation Processor > check Enable annotaion processing and apply
+
 //    compile('org.springframework.boot:spring-boot-starter-web');
 //    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
